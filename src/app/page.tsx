@@ -34,13 +34,13 @@ export default function Page() {
   return (
     <>
       <ReCaptchaProvider reCaptchaKey="6Ldrbk0qAAAAAKBNvSqKUxRd1jnfaXsyo_Is6Eqv">
-        <div className="p-4 min-h-screen ">
-          <div className="mx-auto h-full border-black border-2 rounded-md hover:shadow-[8px_8px_0px_rgba(0,0,0,1)] bg-white">
+        <div className="p-4 min-h-screen">
+          <div className="mx-auto max-w-lg h-full border-black border-2 rounded-md hover:shadow-[8px_8px_0px_rgba(0,0,0,1)] bg-white">
             <article className="w-full h-full">
               <div className="mb-3 px-4 py-2 text-left h-full">
-                <p className="text-base mb-4">hehehe...</p>
+                <p className="text-base mb-4"></p>
 
-                <h1 className="text-[32px] text-center mb-4">Roasting IG</h1>
+                <h1 className="text-[32px] text-center mb-4">Roasting IG 🗿</h1>
 
                 <div className="flex flex-col sm:flex-row gap-1.5">
                   <input
