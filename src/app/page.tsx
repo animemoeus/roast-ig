@@ -23,7 +23,7 @@ export default function Page() {
         setIsLoading(false);
       })
       .catch((error) => {
-        alert("Lahh, error anjirr! Coba lagi ya, hehehe...");
+        alert("Lahh, lagi banyak yang make! Coba lagi ya, hehehe...");
         console.error(error);
       })
       .finally(() => {
