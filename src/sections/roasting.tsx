@@ -1,6 +1,14 @@
 import Marquee from "react-fast-marquee";
+import React from "react";
+import { RoastingDataType } from "@/app/page";
 
-export default function Community() {
+import Image from "next/image";
+
+export default function Roasting({
+  roastingData,
+}: {
+  roastingData: RoastingDataType | null;
+}) {
   const emoji = [
     "o((>ω< ))o",
     "╰（‵□′）╯",
@@ -9,6 +17,10 @@ export default function Community() {
     "(￢︿̫̿￢☆)",
     "눈_눈",
   ];
+
+  React.useEffect(() => {
+    console.log(roastingData?.username);
+  }, [roastingData]);
 
   const Star3 = () => {
     return (
@@ -48,18 +60,23 @@ export default function Community() {
           <div className="group flex flex-col justify-center">
             <div className="border-border dark:border-darkBorder shadow-light dark:shadow-dark dark:bg-darkBg mb-4 min-h-48 w-full rounded-base border-2 bg-bg p-5 lg:mb-8 w900:mx-auto w900:min-h-20 w900:w-2/3 w500:w-full">
               <div className="flex items-center gap-5">
-                <img
-                  className="border-border dark:border-darkBorder h-12 w-12 rounded-base border-2"
-                  src=""
+                <Image
+                  src={roastingData?.profile_pic_url || ""}
                   alt="pfp"
+                  width={48}
+                  height={48}
+                  className="rounded-full"
+                  blurDataURL={roastingData?.profile_pic_url}
                 />
 
                 <div>
-                  <h4 className="text-lg font-heading">Arter Tendena</h4>
-                  <p className="text-sm font-base">arter_tenden</p>
+                  <h4 className="text-lg font-heading">
+                    {roastingData?.full_name}
+                  </h4>
+                  <p className="text-sm font-base">{roastingData?.username}</p>
                 </div>
               </div>
-              <div className="mt-5">lorem </div>
+              <div className="mt-5">{roastingData?.roasting_text}</div>
             </div>
           </div>
         </div>

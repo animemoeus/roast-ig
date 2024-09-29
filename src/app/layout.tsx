@@ -5,6 +5,8 @@ export const metadata = {
   description: "by Arter Tendean",
 };
 
+import Providers from "./providers";
+
 import { ThemeProvider } from "@/components/theme-provider";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 
@@ -19,9 +21,11 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <ThemeProvider attribute="class" disableTransitionOnChange>
-          {children}
-          <ThemeSwitcher />
-          <Toaster />
+          <Providers>
+            {children}
+            <ThemeSwitcher />
+            <Toaster />
+          </Providers>
         </ThemeProvider>
       </body>
     </html>
