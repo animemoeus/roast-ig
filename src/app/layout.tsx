@@ -1,8 +1,16 @@
+import { Toaster } from "@/components/ui/toaster";
+import Providers from "./providers";
+
+import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeSwitcher } from "@/components/theme-switcher";
+
+import "./globals.css";
+
 export const metadata = {
   title: "🔥 Roasting IG ",
   description: "by Arter Tendean",
 };
-import "./globals.css";
+
 export default function RootLayout({
   children,
 }: {
@@ -10,7 +18,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <ThemeProvider attribute="class" disableTransitionOnChange>
+          <Providers>
+            {children}
+            <ThemeSwitcher />
+            <Toaster />
+          </Providers>
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

@@ -1,74 +1,101 @@
 "use client";
 
 import { useState } from "react";
-import { ReCaptchaProvider, ReCaptcha } from "next-recaptcha-v3";
-import { getInstagramUserData } from "@/utils";
+import { useToast } from "@/hooks/use-toast";
+import { ToastAction } from "@/components/ui/toast";
+
+import { useReCaptcha } from "next-recaptcha-v3";
+
+import Header from "@/sections/header";
+import Footer from "@/components/footer";
+import Roasting from "@/sections/roasting";
+
+type RoastingDataType = {
+  full_name: string | null;
+  username: string;
+  profile_pic_url: string;
+  roasting_text: string;
+};
 
 export default function Page() {
-  const [username, setUsername] = useState<string>("");
-  const [roastingText, setRoastingText] = useState<string>("");
+  const [username, setUsername] = useState("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
+  const [roastingResult, setRoastingResult] = useState<null | RoastingDataType>(
+    null,
+  );
 
-  const handleRoasting = () => {
+  const { toast } = useToast();
+  const { executeRecaptcha } = useReCaptcha();
+
+  const handleUsernameChange = (e: string) => {
+    setUsername(e);
+  };
+
+  const handleRoasting = async () => {
     if (!username) {
-      alert("Username ga boleh kosong anjirr!");
+      toast({
+        title: "(╯‵□′)╯︵┻━┻",
+        description: "Username ga boleh kosong ya!",
+        action: (
+          <ToastAction altText="Goto schedule to undo">Okeii</ToastAction>
+        ),
+      });
       return;
     }
 
-    setIsLoading(true);
-    getInstagramUserData(username, recaptchaToken ?? "")
-      .then((result) => {
-        setRoastingText(result.roasting_text);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        alert("Lahh, lagi banyak yang make! Coba lagi ya, hehehe...");
-        console.error(error);
-      })
-      .finally(() => {
-        setIsLoading(false);
+    const captcha = await executeRecaptcha("roasting");
+    try {
+      setIsLoading(true);
+
+      const response = await fetch(
+        `https://api.animemoe.us/instagram/roasting/${username}?captcha=${captcha}`,
+      );
+
+      if (!response.ok) {
+        const error = await response.json();
+        toast({
+          title: "╰（‵□′）╯",
+          description: error.error,
+        });
+        return;
+      }
+
+      const data = await response.json();
+      setRoastingResult(data);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (error) {
+      toast({
+        title: "Aduhh 😿",
+        description: "Tidak bisa terhubung ke server",
+        action: (
+          <ToastAction altText="Goto schedule to undo">Okeii</ToastAction>
+        ),
       });
+    } finally {
+      setIsLoading(false);
+    }
+
+    console.log(roastingResult);
   };
 
   return (
-    <>
-      <ReCaptchaProvider reCaptchaKey="6Ldrbk0qAAAAAKBNvSqKUxRd1jnfaXsyo_Is6Eqv">
-        <div className="p-4 min-h-screen">
-          <div className="mx-auto max-w-lg h-full border-black border-2 rounded-md hover:shadow-[8px_8px_0px_rgba(0,0,0,1)] bg-white">
-            <article className="w-full h-full">
-              <div className="mb-3 px-4 py-2 text-left h-full">
-                <p className="text-base mb-4"></p>
+    <div
+      className={
+        "min-h-screen dark:bg-darkBg bg-white bg-[linear-gradient(to_right,#80808033_1px,transparent_1px),linear-gradient(to_bottom,#80808033_1px,transparent_1px)] bg-[size:70px_70px]"
+      }
+    >
+      <Header
+        handleRoasting={handleRoasting}
+        handleUsernameChange={handleUsernameChange}
+        isLoading={isLoading}
+      />
+      {roastingResult && <Roasting roastingData={roastingResult} />}
 
-                <h1 className="text-[32px] text-center mb-4">Roasting IG 🗿</h1>
-
-                <div className="flex flex-col sm:flex-row gap-1.5">
-                  <input
-                    className="basis-9/12 w-full border-black border-2 p-2.5 focus:outline-none focus:shadow-[2px_2px_0px_rgba(0,0,0,1)] focus:bg-[#FFA6F6] active:shadow-[2px_2px_0px_rgba(0,0,0,1)] rounded-md"
-                    placeholder="arter_tendean"
-                    onChange={(e) => setUsername(e.target.value)}
-                  />
-                  <button
-                    className="basis-3/12 w-full h-12 border-black border-2 p-2.5 bg-[#A6FAFF] hover:bg-[#79F7FF] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] active:bg-[#00E1EF] rounded-md disabled:opacity-50 disabled:shadow-[2px_2px_0px_rgba(0,0,0,1)]"
-                    onClick={handleRoasting}
-                    disabled={isLoading}
-                  >
-                    {isLoading ? "Loading..." : "Roast! ☠️"}
-                  </button>
-                  <ReCaptcha
-                    onValidate={(token) => {
-                      setRecaptchaToken(token);
-                    }}
-                    action="page_view"
-                  />
-                </div>
-
-                <p className="mt-4 text-2xl mb-4">{roastingText}</p>
-              </div>
-            </article>
-          </div>
-        </div>
-      </ReCaptchaProvider>
-    </>
+      <div className={"sticky top-[100vh]"}>
+        <Footer />
+      </div>
+    </div>
   );
 }
+
+export type { RoastingDataType };
