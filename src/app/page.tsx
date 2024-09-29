@@ -62,10 +62,11 @@ export default function Page() {
 
       const data = await response.json();
       setRoastingResult(data);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       toast({
         title: "Aduhh 😿",
-        description: error?.message || "Terjadi kesalahan",
+        description: "Tidak bisa terhubung ke server",
         action: (
           <ToastAction altText="Goto schedule to undo">Okeii</ToastAction>
         ),
