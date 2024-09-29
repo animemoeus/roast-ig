@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 
 import "./globals.css";
+
 export default function RootLayout({
   children,
 }: {
