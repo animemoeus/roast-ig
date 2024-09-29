@@ -1,3 +1,5 @@
+import { Toaster } from "@/components/ui/toaster";
+
 export const metadata = {
   title: "🔥 Roasting IG ",
   description: "by Arter Tendean",
@@ -19,6 +21,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" disableTransitionOnChange>
           {children}
           <ThemeSwitcher />
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
