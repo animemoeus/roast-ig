@@ -1,3 +1,4 @@
+import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 export default function Header() {
@@ -5,20 +6,21 @@ export default function Header() {
     <header className="dark:bg-darkBg inset-0 flex min-h-[80dvh] w-full flex-col items-center justify-center bg-white bg-[linear-gradient(to_right,#80808033_1px,transparent_1px),linear-gradient(to_bottom,#80808033_1px,transparent_1px)] bg-[size:70px_70px]">
       <div className="mx-auto w-container max-w-full px-5 py-[110px] text-center lg:py-[150px]">
         <h1 className="text-3xl font-heading md:text-4xl lg:text-5xl">
-          {/* eslint-disable-next-line react/no-unescaped-entities */}
           Instagrammu Siap Kena Roasting? Let's Go!
         </h1>
-        <p className="my-12 mt-8 text-lg font-normal leading-relaxed md:text-xl lg:text-2xl lg:leading-relaxed">
-          Siap untuk melihat profilmu dari sudut pandang yang berbeda? Mari kita
-          roasting dan ketawa bareng! Semua ini demi seru-seruan, jadi jangan
-          baper, ya!
-        </p>
-        <Button
-          size="lg"
-          className="h-12 text-base font-heading md:text-lg lg:h-14 lg:text-xl"
-        >
-          Get started
-        </Button>
+
+        <div className={"mt-7 flex flex-col md:flex-row gap-1.5"}>
+          <Input
+            className="w-full md:w-8/12 p-0 pl-1"
+            type="text"
+            placeholder="arter_tendean"
+            autoComplete={"off"}
+          />
+
+          <Button className={"w-full md:w-4/12"} variant={"noShadow"}>
+            Roast Me!
+          </Button>
+        </div>
       </div>
     </header>
   );
