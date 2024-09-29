@@ -1,16 +1,15 @@
 import { Toaster } from "@/components/ui/toaster";
-
-export const metadata = {
-  title: "🔥 Roasting IG ",
-  description: "by Arter Tendean",
-};
-
 import Providers from "./providers";
 
 import { ThemeProvider } from "@/components/theme-provider";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 
 import "./globals.css";
+
+export const metadata = {
+  title: "🔥 Roasting IG ",
+  description: "by Arter Tendean",
+};
 
 export default function RootLayout({
   children,

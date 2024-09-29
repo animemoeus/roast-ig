@@ -78,7 +78,11 @@ export default function Page() {
   };
 
   return (
-    <div className={"min-h-screen"}>
+    <div
+      className={
+        "min-h-screen dark:bg-darkBg bg-white bg-[linear-gradient(to_right,#80808033_1px,transparent_1px),linear-gradient(to_bottom,#80808033_1px,transparent_1px)] bg-[size:70px_70px]"
+      }
+    >
       <Header
         handleRoasting={handleRoasting}
         handleUsernameChange={handleUsernameChange}
@@ -86,7 +90,7 @@ export default function Page() {
       />
       {roastingResult && <Roasting roastingData={roastingResult} />}
 
-      <div className={""}>
+      <div className={"sticky top-[100vh]"}>
         <Footer />
       </div>
     </div>
