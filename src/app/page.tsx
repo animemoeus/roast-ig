@@ -62,10 +62,10 @@ export default function Page() {
 
       const data = await response.json();
       setRoastingResult(data);
-    } catch (error: unknown | { message: string }) {
+    } catch (error) {
       toast({
         title: "Aduhh 😿",
-        description: error?.message,
+        description: error?.message || "Terjadi kesalahan",
         action: (
           <ToastAction altText="Goto schedule to undo">Okeii</ToastAction>
         ),
