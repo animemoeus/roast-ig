@@ -20,7 +20,7 @@
     "lucide-react": "^0.468.0",
     "next": "15.2.4",
     "next-recaptcha-v3": "^1.5.2",
-    "next-themes": "^0.3.0",
+    "next-themes": "^0.4.6",
     "react": "^18",
     "react-dom": "^18",
     "react-fast-marquee": "^1.6.5",
