@@ -21,7 +21,7 @@
     "next": "15.2.4",
     "next-recaptcha-v3": "^1.5.2",
     "next-themes": "^0.3.0",
-    "react": "^18",
+    "react": "^19",
     "react-dom": "^18",
     "react-fast-marquee": "^1.6.5",
     "react-hook-form": "^7.54.2",
@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "@types/node": "^22",
-    "@types/react": "^18",
+    "@types/react": "^19",
     "@types/react-dom": "^18",
     "eslint": "^8.57.1",
     "eslint-config-next": "14.2.13",
